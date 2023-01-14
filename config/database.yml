@@ -1,0 +1,16 @@
+defaults: &defaults
+  adapter: postgresql
+  encoding: unicode
+  min_messages: warning
+  host: <%= ENV['HOST_DB'] %>
+  username: <%= ENV['USERNAME_DB'] %>
+  password: <%= ENV['PASSWORD_DB'] %>
+  port: <%= ENV['PORT_DB'] %>
+
+development:
+  database: <%= "wallet_system" %>_dev
+  <<: *defaults
+
+test:
+  database: <%= "wallet_system" %>_test
+  <<: *defaults
