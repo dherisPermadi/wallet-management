@@ -1,0 +1,9 @@
+var errors = <%= errors_messages.to_json.html_safe %>;
+
+$("#errors").empty();
+
+for (var i = 0; i < errors.length; i++) {
+    $("#errors").append("<div class='alert alert-danger'>" + errors[i] + "</div>");
+};
+
+$("#errors").show();

@@ -1,0 +1,51 @@
+= search_form_for @search do |f|
+  .card.card-collapsed
+    .card-header
+      h3.card-title = t('.page_title')
+      .card-options
+        a.card-options-collapse data-toggle="card-collapse" href="#"
+          i.fe.fe-chevron-up
+        a.card-options-remove data-toggle="card-remove" href="#"
+          i.fe.fe-x
+    .card-body
+      .row
+        .col-md-3
+          .form-group
+            = f.label :name_cont, class: 'form-label'
+            = f.search_field :name_cont, class: 'form-control', placeholder: t('.name_cont')
+        .col-md-3
+          .form-group
+            = f.label :email_cont, class: 'form-label'
+            = f.search_field :email_cont, class: 'form-control', placeholder: t('.email_cont')
+        .col-md-6
+          .form-group
+            = f.label t('users.position_id'), class: 'form-label'
+            .selectgroup.w-100
+              - Position.all.each do |position|
+                label.selectgroup-item
+                  = check_box_tag('q[position_id_eq_any][]', position.id,
+                    params.dig(:q, :position_id_eq_any) \
+                    ? params.dig(:q, :position_id_eq_any).include?(position.id.to_s) \
+                    : false, class: 'selectgroup-input')
+                  span.selectgroup-button.text-nowrap = position.name.titleize
+        .col-md-6
+          .form-group
+            = f.label t('users.roles'), class: 'form-label'
+            .selectgroup.w-100
+              - Role.all.each do |role|
+                label.selectgroup-item
+                  = check_box_tag('q[roles_id_eq_any][]', role.id,
+                    params.dig(:q, :roles_id_eq_any) ? params.dig(:q, :roles_id_eq_any).include?(role.id.to_s) : false,
+                    class: 'selectgroup-input')
+                  span.selectgroup-button.text-nowrap = role.name.titleize
+        .col-md-3
+          .form-group
+            = f.label :phone_cont, class: 'form-label'
+            = f.search_field :phone_cont, class: 'form-control', placeholder: t('.phone_cont')
+        .col-md-3
+          .form-group
+            = f.label :address_cont, class: 'form-label'
+            = f.search_field :address_cont, class: 'form-control', placeholder: t('.address_cont')
+    .card-footer.text-right
+      = link_to t('button.clear_filter'), users_path, class: 'btn btn-link'
+      = f.submit t('button.filter'), class: 'btn btn-primary'

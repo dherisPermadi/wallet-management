@@ -1,0 +1,13 @@
+.page
+  .page-single
+    .container
+      .row
+        .col.col-login.mx-auto
+          .text-center.mb-4
+            = image_tag 'logo/new_frontliners.png', style: 'height:60%;width:60%;'
+          - if devise_error_messages!.present?
+            .alert.alert-icon.alert-success role="alert"
+              i.fe.fe-alert-triangle.mr-2 aria-hidden="true"
+              = devise_error_messages!
+          .text-center.text-muted
+            = link_to "Log in", new_session_path(resource_name), class: 'btn btn-primary btn-block'

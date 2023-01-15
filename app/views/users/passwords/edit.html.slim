@@ -1,0 +1,28 @@
+.page
+  .page-single
+    .container
+      .row
+        .col.col-login.mx-auto
+          .text-center.mb-6
+            = image_tag 'logo/new_frontliners.png', style: 'height:60%;width:60%;'
+          - if devise_error_messages!.present?
+            .alert.alert-icon.alert-danger role="alert"
+              i.fe.fe-alert-triangle.mr-2 aria-hidden="true"
+              = devise_error_messages!
+          = form_for(resource, as: resource_name, url: password_path(resource_name),
+            html: { method: :put, class: 'card' }) do |f|
+            = f.hidden_field :reset_password_token
+            .card-body.p-6
+              .card-title Change your password
+              .form-group
+                = f.label :password, class: 'form-label'
+                = f.password_field :password, autofocus: true, autocomplete: "new-password", class: 'form-control'
+              .form-group
+                = f.label :password_confirmation, class: 'form-label'
+                = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+              .form-footer
+                = f.submit "Ganti kata sandi", class: 'btn btn-primary btn-block'
+          .text-center.text-muted
+            | Forget it,&nbsp;
+            = link_to 'send me back', new_user_session_path
+            | &nbsp;to the sign in screen.

@@ -1,0 +1,27 @@
+.page
+  .page-single
+    .container
+      .row
+        .col.col-login.mx-auto
+          .text-center.mb-4
+            = image_tag 'logo/new_frontliners.png', style: 'height:60%;width:60%;'
+          = render 'shared/flash_messages'
+          = form_for(resource, as: resource_name, url: session_path(resource_name),
+            html: { class: 'card' }) do |f|
+            .card-body.p-6
+              .card-title Login to your account
+              .form-group
+                label.form-label Email address
+                = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+              .form-group
+                label.form-label
+                  | Password
+                  = link_to "I forgot password", new_password_path(resource_name), class: 'float-right small'
+                = f.password_field :password, autocomplete: "current-password", class: 'form-control'
+              - if devise_mapping.rememberable?
+                .form-group
+                  label.custom-control.custom-checkbox
+                    = f.check_box :remember_me, class: 'custom-control-input'
+                    span.custom-control-label Remember me
+              .form-footer
+                = f.submit "Sign in", class: 'btn btn-primary btn-block'

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+html
+  head
+    = csrf_meta_tags
+    = csp_meta_tag
+    meta content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" name="viewport" /
+    meta content="ie=edge" http-equiv="X-UA-Compatible" /
+    meta content="en" http-equiv="Content-Language" /
+    meta content="#2d89ef" name="msapplication-TileColor" /
+    meta content="#4188c9" name="theme-color" /
+    meta content="black-translucent" name="apple-mobile-web-app-status-bar-style" /
+    meta content="yes" name="apple-mobile-web-app-capable" /
+    meta content="yes" name="mobile-web-app-capable" /
+    meta content="True" name="HandheldFriendly" /
+    meta content="320" name="MobileOptimized" /
+    title = "#{content_for?(:title) ? yield(:title) : 'Wallet Management'}"
+    = stylesheet_link_tag 'application', media: 'all'
+    = render 'shared/assets_config/css'
+    = javascript_include_tag 'application'
+    javascript:
+      I18n.locale = "#{I18n.locale}";
+  body
+    - if current_user.present?
+      .page
+        .flex-fill
+          = render 'shared/header'
+          = render 'shared/navigation'
+          .my-3.my-md-5
+            = yield
+        = render 'shared/footer'
+    - else
+      = yield
+    = render 'shared/assets_config/js'

@@ -1,0 +1,55 @@
+= form_for @user do |f|
+  = render partial: 'shared/form_error_messages', locals: { selector: @user }
+  .card
+    .card-body
+      h3.card-title
+        = t('.page_title')
+      .row
+        .col-md-12
+          .form-group
+            = f.label :email, class: 'form-label'
+            = f.text_field :email, class: 'form-control'
+        .col-md-12
+          .form-group
+            = f.label :name, class: 'form-label'
+            = f.text_field :name, class: 'form-control'
+        .col-md-12
+          .form-group
+            = f.label :position_id, class: 'form-label'
+            .selectgroup.w-100
+              - Position.all.each do |position|
+                label.selectgroup-item
+                  = f.radio_button :position_id, position.id, class: 'selectgroup-input'
+                  span.selectgroup-button = position.name.titleize
+        .col-md-12
+          .form-group
+            = f.label :roles, class: 'form-label'
+            .selectgroup.selectgroup-pills
+              - Role.all.each do |role|
+                label.selectgroup-item
+                  = check_box("user", "roles", { multiple: true,
+                                                 class: 'selectgroup-input',
+                                                 checked: @user.role_ids.include?(role.id) },
+                    role.id, nil)
+                  span.selectgroup-button = role.name.titleize
+        .col-md-12
+          .form-group
+            = f.label 'Branch ( opsional )', class: 'form-label'
+            .selectgroup.w-100
+              - Branch.all.each do |branch|
+                label.selectgroup-item
+                  = f.radio_button :branch_id, branch.id, class: 'selectgroup-input'
+                  span.selectgroup-button = branch.name.titleize
+        .col-md-12
+          .form-group
+            = f.label :phone, class: 'form-label'
+            = f.text_field :phone, class: 'form-control'
+        .col-md-12
+          .form-group
+            = f.label :address, class: 'form-label'
+            = f.text_area :address, class: 'form-control'
+
+    .card-footer
+      .d-flex
+        = link_to t('button.back'), users_path, class: 'btn btn-link'
+        = f.submit t('.submit'), class: 'btn btn-primary ml-auto'

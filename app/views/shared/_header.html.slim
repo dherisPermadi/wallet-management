@@ -1,0 +1,21 @@
+.header.py-4
+  .container
+    .d-flex
+    .d-flex.align-items-center
+      = link_to root_path, class: 'header-brand' do
+        //= image_tag 'logo/new_frontliners.png', style: 'height:20%;width:20%;'
+      .d-flex.order-lg-2.ml-auto
+        .dropdown
+          a.nav-link.pr-0.leading-none[href="#" data-toggle="dropdown"]
+            = image_tag 'vector/avatar.svg', class: 'avatar'
+            span.ml-2.d-none.d-lg-block
+              span.text-default
+                = current_user.email
+              small.text-muted.d-block.mt-1
+                = current_user.user_type
+          .dropdown-menu.dropdown-menu-right.dropdown-menu-arrow
+            = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
+              i.dropdown-icon.fe.fe-log-out
+              = t('user_options.logout')
+      a.header-toggler.d-lg-none.ml-3.ml-lg-0[href="#" data-toggle="collapse" data-target="#headerMenuCollapse"]
+        span.header-toggler-icon

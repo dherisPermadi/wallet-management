@@ -1,0 +1,4 @@
+- if asset_exists? "#{controller_name}/mixins.scss"
+  = stylesheet_link_tag "#{controller_name}/mixins"
+- if asset_exists? "#{controller_name}/#{action_name}.scss"
+  = stylesheet_link_tag "#{controller_name}/#{action_name}"
