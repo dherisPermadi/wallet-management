@@ -1,0 +1,47 @@
+.container
+  .row
+    .col-md-3
+      = render 'shared/users/settings'
+    .col-md-9
+      = render 'shared/flash_messages'
+      .card
+        .card-body
+          h3.card-title
+            = t('.page_title')
+          .row
+            .col-3
+              .detail-image
+                = link_to image_tag(@user.avatar.present? ? @user.avatar.url : asset_url('vector/avatar.svg'),
+                  class: 'h-10 d-block w-100'), @user.avatar.present? ? @user.avatar.url : 'vector/avatar.svg'
+            .col-1
+            .col-8
+              .row
+                .col-md-3
+                  h5.mb-2
+                    = t('users.email')
+                .text-muted-dark
+                  = ": #{@user.email}"
+              .row
+                .col-md-3
+                  h5.mb-2
+                    = t('users.name')
+                .text-muted-dark
+                  = ": #{@user.name}"
+              .row
+                .col-md-3
+                  h5.mb-2
+                    = t('users.position_id')
+                .text-muted-dark
+                  = ": #{@user.position_id.present? ? @user.position.name.titleize : '-'}"
+              .row
+                .col-md-3
+                  h5.mb-2
+                    = t('users.phone')
+                .text-muted-dark
+                   = ": #{@user.phone}"
+              .row
+                .col-md-3
+                  h5.mb-2
+                    = t('users.address')
+                .text-muted-dark
+                   = ": #{@user.address}"

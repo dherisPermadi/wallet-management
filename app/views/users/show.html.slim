@@ -1,0 +1,68 @@
+.container
+  .page-header
+    h1.page-title
+      = t('.page_title')
+  .row
+    .col-12
+      = render 'shared/flash_messages'
+      .card
+        .card-body
+          .row.align-items-center.mb-6
+            .col
+              .h3.m-0.font-weight-normal
+                = @user.name
+          .row
+            .col
+              h5.mb-1
+                = t('users.email')
+              .text-muted-dark
+                = @user.email
+            .col
+              h5.mb-1
+                = t('users.phone')
+              .text-muted-dark
+                = @user.phone
+            .col-7
+        .card-body
+          .row.gutters-lg
+            .col-12
+              .row.mb-5
+                .col
+                  h5.mb-1
+                    = t('users.position_id')
+                  .text-muted-dark
+                    = @user.position_id.present? ? @user.position.name.titleize : "-"
+                .col
+                  h5.mb-1
+                    = t('users.roles')
+                  .text-muted-dark
+                    = @user.role
+                .col
+                  h5.mb-1
+                    = t('users.branch_id')
+                  .text-muted-dark
+                    = @user.branch_id.present? ? @user.branch.name.titleize : "-"
+                .col
+                  h5.mb-1
+                    = t('users.status')
+                  .text-muted-dark
+                  span.status-icon class="#{@user.locked_at? ? 'bg-danger' : 'bg-success'}"
+                  span.text-muted-dark = @user.status
+                .col
+                  h5.mb-1
+                    = t('users.address')
+                  .text-muted-dark
+                    = @user.address
+        .card-footer
+          .d-flex
+            - if can? :update_status, User
+              - if @user.locked_at?
+                = link_to t('button.user_unlock'), update_status_user_path(@user, status: true),
+                  class: 'btn btn-success', method: :post
+              - else
+                = link_to t('button.user_lock'), update_status_user_path(@user),
+                class: 'btn btn-danger', method: :post
+            .ml-auto
+              = link_to t('button.index_user'), users_path, class: 'btn btn-link'
+              - if can? :update, User
+                = link_to t('button.update_user'), edit_user_path(@user), class: 'btn btn-warning'

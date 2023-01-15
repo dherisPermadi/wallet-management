@@ -1,0 +1,242 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Libre+Franklin:300,400,400i,700" rel="stylesheet">
+    <style type="text/css">
+      * {
+          box-sizing: border-box;
+      }
+      b {
+        font-weight: 600 !important;
+      }
+      body {
+          font-family: 'Libre Franklin', sans-serif;
+          background: #F2F2F2;
+          width: 100%;
+          padding: 0;
+          margin: 0;
+      }
+      table {
+          border-collapse:;
+          width: 100%;
+      }
+      td p {
+          margin: 0;
+          color: #000;
+      }
+      td.topbar, td.leftbar, td.rightbar, td.bottombar {
+          background: #F2F2F2;
+      }
+      td.topbar {
+          height: 40px;
+      }
+      td.leftbar, td.rightbar {
+      }
+      td.bottombar {
+          text-align: center;
+          padding: 30px 0 10px;
+      }
+      td.bottombar p {
+          font-size: 12px;
+          line-height: 15px;
+          font-weight: 300;
+      }
+      td.bottombar img {
+          width: 150px;
+          margin-bottom: 6px;
+          margin-left: 15px;
+      }
+      .regards {
+          font-weight: 400;
+          font-style: italic;
+          margin-bottom: 10px;
+      }
+      .call {
+          font-size: 10px;
+          line-height: 12px;
+          color: #595959;
+          white-space: nowrap;
+          margin-top: 10px;
+      }
+      tr.header {
+          display: block;
+          width: 100%;
+          background: #ee507c;
+          border-radius: 3px;
+      }
+      tr.header td {
+          padding: 15px;
+          width: 100%;
+      }
+      tr.header p {
+          text-align: right;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 17px;
+          color: #FFFFFF;
+      }
+      td.thankyou-logo {
+          text-align: center;
+          padding: 35px 0 30px;
+          background: #FFFFFF;
+      }
+      td.thankyou-logo img {
+          width: 123px;
+      }
+      td.main-invoice {
+          padding: 0 15px 15px;
+      }
+      .invoice-code {
+          background: #F4F4F4;
+          border-radius: 3px;
+          text-align: center;
+          padding: 13px 0;
+      }
+      .invoice-code p {
+          font-size: 14px;
+          line-height: 17px;
+      }
+      .invoice-code .code {
+          font-weight: bold;
+          font-size: 18px;
+          line-height: 22px;
+          color: #ee507c;
+      }
+      td.main-title {
+          padding: 0 15px;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 17px;
+      }
+      tr.main-body {
+          display: block;
+          width: calc(100% - 15px);
+          padding: 0 15px;
+      }
+      tr.main-body td {
+          width: 100%;
+          padding: 15px 0 5px;
+          border-bottom: 1px solid #F2F2F2;
+      }
+      tr.main-body:last-of-type td {
+          border: 0;
+      }
+      tr.main-body td p {
+          font-size: 14px;
+          line-height: 17px;
+      }
+      tr.main-body td p.qty {
+          font-size: 11px;
+          line-height: 13px;
+          color: #9F9F9F;
+      }
+      tr.main-body td p.price {
+          white-space: nowrap;
+          font-size: 18px;
+      }
+      td.main-actions {
+          padding: 40px 0 35px;
+          text-align: center;
+      }
+      .btn-invoice {
+          display: inline-block;
+          background: #ee507c;
+          border-radius: 10px;
+          width: 150px;
+          font-weight: bold;
+          font-size: 14px;
+          line-height: 15px;
+          color: #FFFFFF;
+          padding: 13px;
+          text-decoration: none;
+      }
+      .btn-invoice:hover {
+          opacity: 0.75;
+      }
+      .header-grab-white {
+        padding-left: 20px;
+        max-width: 80px
+      }
+      .header-frontliner-white {
+        position: relative;
+        max-width: 130px;
+      }
+      .grey-color {
+        background: #f4f4f4;
+        border-radius: 3px;
+        padding: 12px;
+      }
+      .grey-color table {
+        margin: 0 auto;
+        width: auto;
+      }
+      .grey-color {
+        font-size: 14px;
+        line-height: 28px;
+      }
+    </style>
+  </head>
+  <body>
+    <table cellspacing="0" cellpadding="0">
+      <tbody>
+        <tr>
+          <td colspan="3" class="topbar"></td>
+        </tr>
+        <tr>
+          <td rowspan="2" class="leftbar" width="15%">&nbsp;</td>
+          <td class="main-content" width="70%">
+            <table cellspacing="0" cellpadding="0" style="background: #FFFFFF;font-size: 14px;line-height: 22px;">
+              <tbody>
+                <tr class="header">
+                  <td colspan="2" style="width: 0; line-height: 0">
+                    <p style="text-align: left">TRIms</p>
+                  </td>
+                  <td><p>Account Confirmation</p></td>
+                </tr>
+                <tr style="background: #FFFFFF;">
+                  <td colspan="3" class="main-invoice">
+                    <div style="padding: 30px 0 15px">
+                      <b>Dear <%= @resource.email %>,</b>
+                      <br style="box-sizing: border-box;">
+                      <br style="box-sizing: border-box;">
+                      <p>Dengan mengkonfirmasi Akun Anda resmi menjadi <b><%= @resource.role %></b> di TRIms.</p>
+                    </div>
+                  </td>
+                </tr>
+                <tr style="background: #FFFFFF;">
+                  <td colspan="3" class="main-invoice">
+                    <div>
+                      <hr />
+                      <center>Anda dapat mengonfirmasi email akun Anda melalui tautan di bawah ini:</center>
+                    </div>
+                  </td>
+                </tr>
+                <tr style="background: #FFFFFF;">
+                  <td class="main-invoice">
+                    <div style="padding: 20px 0 15px;">
+                      <center>
+                        <%= link_to 'Konfirmasi Akun', confirmation_url(@resource, confirmation_token: @token), class: 'btn-invoice' %>
+                      </center>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+          <td rowspan="2" class="rightbar" width="15%">&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="bottombar" width="70%">
+            <p class="regards">Regards,</p>
+            <%= image_tag 'https://trims-doterb.sgp1.digitaloceanspaces.com/template/new_frontliners.png', style: 'height:40%;width:40%;' %>
+            <p>Hak Cipta © TRIms</p>
+            <p class="call">Hubungi Super Admin TRIms jika Anda membutuhkan bantuan.</p>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+.container
+  .row.row-cards
+    .col-lg-12
+      = render 'shared/flash_messages'
+      = render 'users/filter'
+    .col-lg-12
+      .card
+        .card-header.d-flex.justify-content-between
+          h3.card-title = t('.page_title')
+          - if can? :create, User
+            = link_to t('.new'), new_user_path, class: 'btn btn-secondary ft-right'
+        .table-responsive
+          table.table.card-table.table-vcenter.text-nowrap.datatable
+            thead
+              tr
+                th = t('users.name')
+                th = t('users.email')
+                th = t('users.position_id')
+                th = t('users.role')
+                th = t('users.branch_id')
+                th = t('users.status')
+                th.blank-title
+                th.blank-title
+            tbody
+              - @users.each do |user|
+                tr
+                  td
+                    = link_to user_path(user), class: 'text-inherit' do
+                      = user.name
+                  td = user.email
+                  td = user.position_id.present? ? user.position.name.titleize : "-"
+                  td = user.role
+                  td = user.branch_id.present? ? user.branch.name.titleize : "-"
+                  td
+                    span.status-icon class="#{user.locked_at? ? 'bg-danger' : 'bg-success'}"
+                    = user.status
+                  td.text-right
+                    = link_to t('button.show'), user_path(user), class: 'btn btn-secondary btn-sm'
+                  td
+                    - if can? :update, User
+                      = link_to edit_user_path(user), class: 'icon mr-4' do
+                        i.fe.fe-edit
+                    - if can? :destroy, User
+                      = link_to user, data: { confirm: t('.confirm_destroy', name: user.name) },
+                        method: :delete, class: 'icon mr-4' do
+                        i.fe.fe-trash-2
+                    - if can? :update_status, User
+                      .item-action.dropdown
+                        a.icon data-toggle="dropdown" href="javascript:void(0)"
+                          i.fe.fe-more-vertical
+                        .dropdown-menu.dropdown-menu-right
+                          - if user.locked_at?
+                            = link_to update_status_user_path(user, status: true), class: 'dropdown-item', method: :post do
+                              i.dropdown-icon.fe.fe-unlock
+                              = t('button.user_unlock')
+                          - else
+                            = link_to update_status_user_path(user), class: 'dropdown-item', method: :post do
+                              i.dropdown-icon.fe.fe-lock
+                              = t('button.user_lock')
+          = paginate @users

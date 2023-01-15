@@ -1,0 +1,5 @@
+- js_name = ['create', 'update', 'edit', 'new'].include?(action_name) ? 'form' : action_name
+- if asset_exists? "#{controller_name}/mixins.js"
+  = javascript_include_tag "#{controller_name}/mixins"
+- if asset_exists? "#{controller_name}/#{js_name}.js"
+  = javascript_include_tag "#{controller_name}/#{js_name}"
