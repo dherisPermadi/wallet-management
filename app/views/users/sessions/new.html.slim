@@ -1,27 +1,35 @@
 .page
   .page-single
     .container
-      .row
+      .row.font-color-main.mt-4
         .col.col-login.mx-auto
-          .text-center.mb-4
-            = image_tag 'logo/new_frontliners.png', style: 'height:60%;width:60%;'
+          .text-center.pb-4.pt-4
+            = image_tag 'vector/main-logo.png', style: 'height: 60%; width: 60%;'
+            h2
+             b.font-color-main My E-Wallet
           = render 'shared/flash_messages'
           = form_for(resource, as: resource_name, url: session_path(resource_name),
-            html: { class: 'card' }) do |f|
+            html: { class: 'card rounded-edge' }) do |f|
             .card-body.p-6
-              .card-title Login to your account
+              h3.card-title.d-flex.justify-content-center Login
               .form-group
-                label.form-label Email address
+                label.form-label Email
                 = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
-              .form-group
-                label.form-label
-                  | Password
-                  = link_to "I forgot password", new_password_path(resource_name), class: 'float-right small'
+              .form-group.mt-2
+                label.form-label Password
                 = f.password_field :password, autocomplete: "current-password", class: 'form-control'
               - if devise_mapping.rememberable?
-                .form-group
+                .form-group.mt-2  style='text-align: center;'
                   label.custom-control.custom-checkbox
                     = f.check_box :remember_me, class: 'custom-control-input'
-                    span.custom-control-label Remember me
+                    span.custom-control-label.m-2.mt--4 Remember me
               .form-footer
-                = f.submit "Sign in", class: 'btn btn-primary btn-block'
+                .row.m-1
+                  = f.submit "Sign in", class: 'btn btn-primary btn-block btn-md'
+                .row.mt-4
+                  .col-5 style='text-align: right;'
+                    = link_to "Sign Up", new_user_registration_path
+                  .col
+                    = " | "
+                  .col-6 style='text-align: left !important;'
+                    = link_to "Forgot Password?", new_password_path(resource_name)
