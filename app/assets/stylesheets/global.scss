@@ -1,0 +1,60 @@
+body {
+  background-color: #CBEDD5;
+  font-family: "Bentham";
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: red;
+  color: white;
+  text-align: center;
+}
+
+.col-login {
+  max-width: 24rem;
+}
+
+.col-signup {
+  max-width: 48rem;
+}
+
+.super-font {
+  font-family: "Brandon Grotesque";
+}
+
+.font-color-main {
+  color: #439A97;
+}
+
+.font-color-lighter {
+  color: #97DECE;
+}
+
+.bg-color-main {
+  background-color: #439A97;
+}
+
+.bg-color-main {
+  background-color: #439A97;
+}
+
+.bg-color-light {
+  background-color: #97DECE;
+}
+
+.rounded-edge {
+  border-radius: 10%;
+}
+
+.card-title {
+  line-height: 1.2;
+  font-weight: 400;
+  margin-bottom: 1.5rem;
+}
+
+.text-center {
+  text-align: center !important;
+}

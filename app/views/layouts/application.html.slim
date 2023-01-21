@@ -15,19 +15,18 @@ html
     meta content="320" name="MobileOptimized" /
     title = "#{content_for?(:title) ? yield(:title) : 'Wallet Management'}"
     = stylesheet_link_tag 'application', media: 'all'
+    = stylesheet_link_tag 'global'
     = render 'shared/assets_config/css'
     = javascript_include_tag 'application'
-    javascript:
-      I18n.locale = "#{I18n.locale}";
   body
     - if current_user.present?
       .page
         .flex-fill
           = render 'shared/header'
-          = render 'shared/navigation'
           .my-3.my-md-5
             = yield
         = render 'shared/footer'
     - else
-      = yield
+      .mt-5
+        = yield
     = render 'shared/assets_config/js'

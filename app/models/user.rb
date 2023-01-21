@@ -4,4 +4,6 @@ class User < ApplicationRecord
 
   # Enum
   enum user_type: { customer: 0, team: 1, admin: 2 }
+
+  validates_presence_of :email, :full_name
 end
