@@ -4,5 +4,7 @@ Rails.application.routes.draw do
     sign_out: 'logout'
   }
 
+  resources :stocks
+
   root 'dashboard#index'
 end

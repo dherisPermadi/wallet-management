@@ -1,18 +1,21 @@
-.header.bg-color-main
+.header.bg-color-main.py-0
   nav.navbar.navbar-expand-lg
     .container-fluid
-      = link_to root_path, class: 'header-brand' do
-        = image_tag 'vector/third-logo.png', style: 'height: 20%; width: 20%;'
-      .container-xxl.text-center
-        #navbarSupportedContent.collapse.navbar-collapse
-          ul.navbar-nav.me-auto.mb-2.mb-lg-0
-            li.nav-item
-              a.nav-link
-                = 'Stock'
-            li.nav-item
-              a.nav-link
-                = 'Transaction'
-              
-      button.btn.btn-sm.btn-danger[type="button"]
-        = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
-          = "Sign Out"
+      div style='width: 10%;'
+        = link_to root_path do
+          = image_tag 'vector/third-logo.png', style: 'height: 30%; width: 30%; margin-top:-10px; margin-right: 5px;'
+        span.super-font.font-color-lighter style='font-size: 20px;'
+          = "My Wallet"
+      .text-center
+        button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+          = link_to stocks_path, class: 'dropdown-item' do
+            .header-menu = 'Stock'
+        button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+          = link_to stocks_path, class: 'dropdown-item' do
+            .header-menu = 'Transaction'
+      div style='width: 10%;'
+        .text-right
+          button.btn.btn-sm.btn-danger[type="button"]
+            = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
+              = "Sign Out"
+

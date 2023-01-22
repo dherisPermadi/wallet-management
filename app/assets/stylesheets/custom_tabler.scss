@@ -1,0 +1,30 @@
+.header-brand {
+  display: flex;
+  align-items: center;
+  .header-brand-img {
+    height: auto;
+  }
+}
+
+.dropdown-item {
+  &:active {
+    color: #16181b;
+    text-decoration: none;
+    background-color: #f8f9fa;
+  }
+}
+
+.sorting, .sorting_asc, .sorting_desc {
+  cursor: pointer;
+  &.blank-title {
+    &:before, &:after {
+      display: none;
+    }
+  }
+}
+
+.selectize-dropdown {
+  .optgroup-header {
+    font-weight: 700;
+  }
+}

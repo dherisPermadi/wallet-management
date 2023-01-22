@@ -1,0 +1,40 @@
+.row.m-4
+  = render 'shared/flash_messages'
+.row.m-2
+  .col-xl-9
+    - if @stocks.present?
+      .card.bg-color-info
+        .card-header.d-flex.justify-content-between
+          h3.card-title = "Master - Stock"
+          .ft-right
+            = link_to 'New Stock', new_stock_path, class: 'btn btn-success'
+        .table-responsive
+          table.table.card-table.table-vcenter.text-nowrap.datatable.table-data
+            thead
+              tr
+                th = 'Name'
+                th = 'Conversion Rate'
+                th = 'Status'
+                th.blank-title
+            tbody
+              - @stocks.each do |stock|
+                tr
+                  td = stock.name
+                  td = "#{stock.conversion_rate} %"
+                  td = stock.status? ? 'Active' : 'Inactive'
+                  td.text-right
+                    = link_to stock_path(stock), title: 'Show Stock', class: 'btn btn-secondary btn-sm' do
+                      i.fe.fe-eye
+                    = link_to edit_stock_path(stock), title: 'Update Stock', class: 'btn btn-secondary btn-sm' do
+                      i.fe.fe-edit
+                    = link_to stock, data: { confirm: "Are you sure to delete this Stock?" },
+                      method: :delete, title: 'Delete Stock', class: 'btn btn-secondary btn-sm' do
+                      i.fe.fe-trash-2
+          = paginate @stocks
+    - else
+      .alert.alert-info.alert-dismissible
+        h4 = "Data Not Found"
+        .btn-list
+          = link_to "New Stock", new_stock_path, class: 'btn btn-success'
+  .col-xl-3
+    = render 'stocks/partial/filter'

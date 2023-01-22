@@ -1,7 +1,9 @@
 - if selector.errors.full_messages.present?
   .alert.alert-icon.alert-danger.mb-3 role="alert"
-    i.fe.fe-alert-triangle.mr-2 aria-hidden="true"
+    i.fe.fe-alert-triangle.mr-4 aria-hidden="true"
+    span.ml-5 = "Warning :"
+    br
     #error_explanation
       ul
         - selector.errors.full_messages.each do |message|
-          li = "#{t('form_error_messages.column') } #{message}"
+          li = message

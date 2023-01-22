@@ -1,0 +1,3 @@
+li.page-item.next
+  = link_to_unless current_page.last?,'<i class="fe fe-chevron-right"></i>'.html_safe, url,
+    rel: 'next', remote: remote, class: 'page-link'
