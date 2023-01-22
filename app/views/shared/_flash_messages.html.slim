@@ -1,8 +1,8 @@
 - if flash[:alert].present?
   .alert.alert-icon.alert-danger role="alert"
     i.fe.fe-alert-triangle.mr-2 aria-hidden="true"
-    = flash[:alert]
+    span.ml-5 = flash[:alert]
 - elsif flash[:notice].present?
   .alert.alert-icon.alert-primary role="alert"
     i.fe.fe-bell.mr-2 aria-hidden="true"
-    = flash[:notice]
+    span.ml-5 = flash[:notice]

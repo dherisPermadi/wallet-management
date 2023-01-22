@@ -6,10 +6,6 @@ class ApplicationController < ActionController::Base
 
   protected
 
-  def html_request?
-    request.format.html?
-  end
-
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:full_name])
   end

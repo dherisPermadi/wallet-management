@@ -37,12 +37,16 @@ body {
   background-color: #439A97;
 }
 
-.bg-color-main {
-  background-color: #439A97;
-}
-
 .bg-color-light {
   background-color: #97DECE;
+}
+
+.bg-color-info {
+  background-color: #d1ecf1;
+}
+
+.bg-color-secondary {
+  background-color: #62B6B7;
 }
 
 .rounded-edge {
@@ -57,4 +61,65 @@ body {
 
 .text-center {
   text-align: center !important;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.header-menu {
+  font-weight: 400;
+  color: #CBEDD5;
+}
+
+.card-header {
+  color: #fff;
+}
+
+.card-footer .btn {
+  margin-left: 10px;
+}
+
+
+@font-face {
+  font-family: "feather";
+  src: font-url("feather/feather-webfont.eot");
+  src: font-url("feather/feather-webfont.eot") format("embedded-opentype"), font-url("feather/feather-webfont.woff") format("woff"), font-url("feather/feather-webfont.ttf") format("truetype"), font-url("feather/feather-webfont.svg") format("svg");
+}
+
+.fe {
+  font-family: 'feather' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1.25;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.fe-eye:before {
+  content: "\e95b";
+}
+
+.fe-edit:before {
+  content: "\e957";
+}
+
+.fe-trash-2:before {
+  content: "\e9e2";
+}
+
+#error_explanation {
+  h2 { display: none }
+  ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
 }

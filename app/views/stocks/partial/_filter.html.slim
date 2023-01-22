@@ -1,0 +1,29 @@
+.card.bg-color-info
+  = search_form_for @search, html: { autocomplete: "off" }  do |f|
+    .card-header.bg-color-main
+      h3.card-title = 'Search Author'
+    .card-body
+      .form-group
+        = f.label 'Name', class: 'form-label'
+        = f.search_field :name_cont, class: 'form-control', placeholder: "Jack Hensen"
+      .form-group
+        = f.label 'Status', class: 'form-label'
+        .selectgroup.w-100
+          - [true, false].each do |status|
+            label.selectgroup-item
+              = check_box_tag('q[status_eq_any][]', status,
+                params.dig(:q, :status_eq_any) ? params.dig(:q, :status_eq_any).include?(status.to_s) : false,
+                class: 'selectgroup-input')
+              span.selectgroup-button.text-nowrap = status ? 'Active' : 'Inactive'
+      .row
+        .col-md-6
+          .form-group
+            = f.label 'Min Conversion Rate (%)', class: 'form-label'
+            = f.search_field :conversion_rate_gteq, class: 'form-control', placeholder: "0.0"
+        .col-md-6
+          .form-group
+            = f.label 'Max Conversion Rate (%)', class: 'form-label'
+            = f.search_field :conversion_rate_lteq, class: 'form-control', placeholder: "1.0"
+    .card-footer.text-right.ml-2
+      = f.submit 'Filter', class: 'btn btn-primary'
+      = link_to 'Clear Filter', stocks_path, class: 'btn btn-secondary'
