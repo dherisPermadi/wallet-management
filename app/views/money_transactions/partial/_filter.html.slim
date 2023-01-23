@@ -1,0 +1,31 @@
+.card.bg-color-info
+  = search_form_for @search, html: { autocomplete: "off" }  do |f|
+    .card-header.bg-color-main
+      h3.card-title = 'Search Money Transaction'
+    .card-body
+      - if current_user.user_type.eql?('admin')
+        .form-group
+          = f.label 'Name', class: 'form-label'
+          = f.search_field :transactionable_of_Stock_type_name_or_transactionable_of_Team_type_name_or_transactionable_of_User_type_name_cont,
+            class: 'form-control', placeholder: "Jack Hensen / Gold / A Teaam"
+      .form-group
+        = f.label 'Transaction Type', class: 'form-label'
+        .selectgroup.w-100
+          - MoneyTransaction.transaction_types.each do |type|
+            label.selectgroup-item
+              = check_box_tag('q[transaction_type_eq_any][]', type.last,
+                params.dig(:q, :transaction_type_eq_any) ? params.dig(:q, :transaction_type_eq_any).include?(type.last.to_s) : false,
+                class: 'selectgroup-input')
+              span.selectgroup-button.text-nowrap = type.first    
+        .row
+          .col-md-6
+            .form-group
+              = f.label 'Minimal Amount', class: 'form-label'
+              = f.search_field :amount_gteq, class: 'form-control', placeholder: "0.0"
+          .col-md-6
+            .form-group
+              = f.label 'Maximal Amount', class: 'form-label'
+              = f.search_field :amount_lteq, class: 'form-control', placeholder: "10000"
+    .card-footer.text-right.ml-2
+      = f.submit 'Filter', class: 'btn btn-primary'
+      = link_to 'Clear Filter', money_transactions_path, class: 'btn btn-secondary'

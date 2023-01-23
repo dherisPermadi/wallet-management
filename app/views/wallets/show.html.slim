@@ -1,0 +1,29 @@
+.page-header.m-4
+  h1.page-title
+    = "Wallet"
+.row.m-2
+  .col-6
+    = render 'shared/flash_messages'
+    .card.bg-color-info
+      .card-body
+        .row
+          .col-12
+            .row.align-items-center.mb-6
+              .col
+                .h3.m-0.font-weight-normal
+                  = @wallet.walletable.name
+            .row
+              .col-md-4
+                h5.mb-1
+                  = 'Name'
+                .text-muted-dark
+                  = @wallet.walletable.name
+              .col-md-4
+                h5.mb-1
+                  = 'Balance'
+                .text-muted-dark
+                  = nominal_format(@wallet.balance)
+              .col-md-4
+      .card-footer.text-right.ml-2
+        = link_to "Back", root_path, class: 'btn btn-secondary'
+        = link_to "Transfer Money", new_money_transaction_path(transaction_type: 'transfer'), class: 'btn btn-success'

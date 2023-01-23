@@ -1,0 +1,71 @@
+= form_for @money_transaction, html: { autocomplete: 'off' } do |f|
+  = render partial: 'shared/form_error_messages', locals: { selector: @money_transaction }
+  .col-md-6
+    .card.bg-color-info
+      .card-body
+        h3.card-title
+          = "Deposit Wallet"
+        .row
+          .col-md-4
+            = f.hidden_field :transaction_type, value: 'deposit'
+            .form-group
+              = f.label 'Wallet Owner Type', class: 'form-label'
+              .selectgroup.w-100
+                - ['User', 'Team', 'Stock'].each do |transactionable_type|
+                  label.selectgroup-item
+                    = f.radio_button :transactionable_type, transactionable_type, checked: (transactionable_type == 'User' || transactionable_type == @money_transaction.transactionable_type),
+                      class: 'selectgroup-input', onchange: 'displayWalletableCollection(this.value)'
+                    span.selectgroup-button = transactionable_type
+          .col-md-4
+            .form-group
+              = f.label 'Wallet Owner', class: 'form-label'
+              = f.hidden_field :transactionable_id, class: 'transactionable-id'
+              = f.collection_select :user_id, User.order(:name), :id, :name, {}, {class: 'form-control', onchange: 'updateTransactionableId(this.value)'}
+              = f.collection_select :team_id, Team.order(:name), :id, :name, {}, {class: 'form-control', onchange: 'updateTransactionableId(this.value)'}
+              = f.collection_select :stock_id, Stock.order(:name), :id, :name, {}, {class: 'form-control', onchange: 'updateTransactionableId(this.value)'}
+          .col-md-4
+            .form-group
+              = f.label 'Amount', class: 'form-label'
+              = f.text_field :amount, class: 'form-control'
+
+      .card-footer
+        .d-flex
+          = link_to "Back", money_transactions_path, class: 'btn btn-secondary'
+          = f.submit "Submit", class: 'btn btn-primary ml-auto'
+
+javascript:
+  if ("#{@money_transaction.transactionable_id.blank?}" == 'true') {
+    updateTransactionableId($("#money_transaction_user_id option:first").val());
+    $('#money_transaction_stock_id').hide();
+    $('#money_transaction_team_id').hide();
+  }
+  displayWalletableCollection("#{@money_transaction.transactionable_type}");
+
+  function updateTransactionableId(id) {
+    $('.transactionable-id').val(id);
+  }
+
+  function displayWalletableCollection(type) {
+    if (type == 'Stock') {
+      if ("#{@money_transaction.transactionable_id.blank?}" == 'true') {
+        updateTransactionableId($("#money_transaction_stock_id option:first").val());
+      }
+      $('#money_transaction_stock_id').show();
+      $('#money_transaction_user_id').hide();
+      $('#money_transaction_team_id').hide();
+    } else if (type == 'Team') {
+      if ("#{@money_transaction.transactionable_id.blank?}" == 'true') {
+        updateTransactionableId($("#money_transaction_team_id option:first").val());
+      }
+      $('#money_transaction_stock_id').hide();
+      $('#money_transaction_user_id').hide();
+      $('#money_transaction_team_id').show();
+    } else {
+      if ("#{@money_transaction.transactionable_id.blank?}" == 'true') {
+        updateTransactionableId($("#money_transaction_user_id option:first").val());
+      }
+      $('#money_transaction_stock_id').hide();
+      $('#money_transaction_user_id').show();
+      $('#money_transaction_team_id').hide();
+    }
+  }

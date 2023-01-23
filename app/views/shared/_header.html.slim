@@ -3,19 +3,33 @@
     .container-fluid
       div style='width: 10%;'
         = link_to root_path do
-          = image_tag 'vector/third-logo.png', style: 'height: 30%; width: 30%; margin-top:-10px; margin-right: 5px;'
-        span.super-font.font-color-lighter style='font-size: 20px;'
-          = "My Wallet"
+          = image_tag 'vector/third-logo.png', style: 'height: 50%; width: 50%;'
       .text-center
-        button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
-          = link_to stocks_path, class: 'dropdown-item' do
-            .header-menu = 'Stock'
-        button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
-          = link_to stocks_path, class: 'dropdown-item' do
-            .header-menu = 'Transaction'
+        - if current_user.user_type.eql?('admin')
+          button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+            = link_to stocks_path, class: 'dropdown-item' do
+              .header-menu = 'Master Stock'
+          button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+            = link_to stock_items_path, class: 'dropdown-item' do
+              .header-menu = 'Stock Item'
+          button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+            = link_to wallets_path, class: 'dropdown-item' do
+              .header-menu = 'Wallet'
+          button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+            = link_to money_transactions_path, class: 'dropdown-item' do
+              .header-menu = 'Money Transaction'
+        - else
+          button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+            = link_to wallet_path(id: current_user.wallet.id), class: 'dropdown-item' do
+              .header-menu = 'Wallet'
+          button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+            = link_to stock_items_path, class: 'dropdown-item' do
+              .header-menu = 'Stock Item'
+          button.mx-1.btn.btn-lg.btn-outline-info[type="button"]
+            = link_to money_transactions_path, class: 'dropdown-item' do
+              .header-menu = 'Transaction'
       div style='width: 10%;'
         .text-right
           button.btn.btn-sm.btn-danger[type="button"]
             = link_to destroy_user_session_path, method: :delete, class: 'dropdown-item' do
               = "Sign Out"
-

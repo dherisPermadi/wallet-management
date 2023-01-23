@@ -1,0 +1,66 @@
+.page-header.m-4
+  h1.page-title
+    = "Transaction Detail"
+.row.m-2
+  = render 'shared/flash_messages'
+  .col-6
+    .card.bg-color-info
+      .card-body
+        .row
+          .col-12
+            .row.align-items-center.mb-6
+              .col
+                .h3.m-0.font-weight-normal
+                  = @money_transaction.transaction_type
+            - if current_user.user_type.eql?('admin')
+              .row
+                .col-md-4
+                  h5.mb-1
+                    = 'Wallet Owner Type'
+                  .text-muted-dark
+                    = @money_transaction.transactionable_type
+                .col-md-4
+                  h5.mb-1
+                    = 'Wallet Owner Name'
+                  .text-muted-dark
+                    = @money_transaction.transactionable.name
+            .row
+              .col-md-4
+                h5.mb-1
+                  = 'Wallet Receiver Type'
+                .text-muted-dark
+                  = @money_transaction.targetable_type
+              .col-md-4
+                h5.mb-1
+                  = 'Wallet Receiver Name'
+                .text-muted-dark
+                  = @money_transaction.targetable.name
+              .col-md-4
+                h5.mb-1
+                  = 'Amount'
+                .text-muted-dark
+                  = nominal_format(@money_transaction.amount)
+      .card-footer
+        .d-flex
+          .ml-auto
+            = link_to "Back", money_transactions_path, class: 'btn btn-secondary'
+  .col-md-6
+    .card.bg-color-info
+      .card-header.d-flex.justify-content-between
+        h3.card-title style='width:20%;'
+          = "Wallet Transaction"
+      .table-responsive
+        table.table.card-table.table-vcenter.text-nowrap.datatable.table-data
+          thead
+            tr
+              th = 'Wallet Owner Type'
+              th = 'Wallet Owner Name'
+              th = 'Event Type'
+              th.text-right = 'Amount'
+          tbody
+            - @money_transaction.wallet_transactions.each do |transaction|
+              tr
+                td = transaction.wallet.walletable_type
+                td = transaction.wallet.walletable.name
+                td = transaction.event
+                td.text-right = nominal_format(transaction.amount)

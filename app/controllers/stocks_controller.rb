@@ -4,7 +4,7 @@ class StocksController < ApplicationController
   before_action :set_stock, only: %i[show edit update destroy]
 
   def index
-    @search = Stock.all.order(name: :asc).ransack(params[:q])
+    @search = Stock.order(name: :asc).ransack(params[:q])
     @stocks = @search.result(distinct: true).page(params[:page] || 1).per(10)
   end
 

@@ -1,0 +1,43 @@
+.row.font-color-main.mt-4
+  .col.col-login.mx-auto
+    .text-center.pb-4.pt-4
+      b
+        .row
+          h1 = "Hello, #{current_user.name}."
+        .row
+          h3 = "Welcome back to My Wallet!"
+      br
+      br
+      .row.text-center
+        .col-6
+          = link_to wallet_path(current_user.wallet.id), class: 'dropdown-item' do
+            .card.bg-color-info
+              .card-body
+                = image_tag 'vector/admin-logo.png'
+                br
+                .super-font.font-color-main.text-center
+                  = "Wallet"
+        .col-6
+          = link_to money_transactions_path, class: 'dropdown-item' do
+            .card.bg-color-info
+              .card-body
+                = image_tag 'vector/second-logo.png'
+                br
+                .super-font.font-color-main.text-center
+                  = "Transaction"
+        .col-6
+          = link_to new_money_transaction_path(transaction_type: 'buying'), class: 'dropdown-item' do
+            .card.bg-color-info
+              .card-body
+                = image_tag 'vector/fifth-logo.png', style: 'height: 65%; width: 65%;'
+                br
+                .super-font.font-color-main.text-center
+                  = "Buy Stock"
+        .col-6
+          = link_to new_money_transaction_path(transaction_type: 'selling'), class: 'dropdown-item' do
+            .card.bg-color-info
+              .card-body
+                = image_tag 'vector/fourth-logo.png', style: 'height: 80%; width: 80%;'
+                br
+                .super-font.font-color-main.text-center
+                  = "Sell Stock"

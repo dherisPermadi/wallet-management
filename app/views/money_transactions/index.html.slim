@@ -1,0 +1,48 @@
+.row.m-4
+  = render 'shared/flash_messages'
+.row.m-2
+  .col-xl-9
+    - if @money_transactions.present?
+      .card.bg-color-info
+        .card-header.d-flex.justify-content-between
+          h3.card-title style='width:20%;'
+            = "Money Transaction"
+          .text-right
+            - if current_user.user_type.eql?('admin')
+              = link_to 'Wallet Deposit', new_money_transaction_path(transaction_type: 'deposit'), class: 'btn btn-success'
+              = link_to 'Wallet Transfer', new_money_transaction_path(transaction_type: 'transfer'), class: 'btn btn-success ml-2'
+        .table-responsive
+          table.table.card-table.table-vcenter.text-nowrap.datatable.table-data
+            thead
+              tr
+                th = 'Transaction Type'
+                - if current_user.user_type.eql?('admin')
+                  th = 'Wallet Owner Type'
+                  th = 'Wallet Owner Name'
+                - else
+                  th = 'Wallet Receiver Type'
+                  th = 'Wallet Receiver Name'
+                th.text-right = 'Amount'
+                th.blank-title
+            tbody
+              - @money_transactions.each do |money_transaction|
+                tr
+                  td = money_transaction.transaction_type
+                  - if current_user.user_type.eql?('admin')
+                    td = money_transaction.transactionable_type
+                    td = money_transaction.transactionable.name
+                  - else
+                    td = money_transaction.targetable_type
+                    td = money_transaction.targetable&.name
+                  td.text-right = nominal_format(money_transaction.amount)
+                  td.text-right
+                    = link_to money_transaction_path(money_transaction), title: 'Show Transaction', class: 'btn btn-secondary btn-sm' do
+                      i.fe.fe-eye
+          = paginate @money_transactions
+    - else
+      .alert.alert-info.alert-dismissible
+        h4 = "Data Not Found"
+        .btn-list
+          = link_to "New Money Transaction", new_money_transaction_path, class: 'btn btn-success'
+  .col-xl-3
+    = render 'money_transactions/partial/filter'
