@@ -1,0 +1,9 @@
+.row.m-2
+  - if params[:transaction_type].eql?('deposit')
+    = render 'money_transactions/partial/form_deposit'
+  - if params[:transaction_type].eql?('transfer')
+    = render 'money_transactions/partial/form_transfer'
+  - if params[:transaction_type].eql?('buying')
+    = render 'money_transactions/partial/form_buying'
+  - if params[:transaction_type].eql?('selling')
+    = render 'money_transactions/partial/form_selling'

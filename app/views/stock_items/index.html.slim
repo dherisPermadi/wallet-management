@@ -1,0 +1,38 @@
+.row.m-4
+  = render 'shared/flash_messages'
+.row.m-2
+  .col-xl-9
+    - if @stock_items.present?
+      .card.bg-color-info
+        .card-header.d-flex.justify-content-between
+          h3.card-title style='width:20%;'
+            = "Stock Item"
+          - if current_user.user_type.eql?('customer')
+            .text-right
+              = link_to 'Buy Stock', new_money_transaction_path(transaction_type: 'buying'), class: 'btn btn-success'
+              = link_to 'Sell Stock', new_money_transaction_path(transaction_type: 'selling'), class: 'btn btn-success ml-2'
+        .table-responsive
+          table.table.card-table.table-vcenter.text-nowrap.datatable.table-data
+            thead
+              tr
+                th = 'Stock Name'
+                - if current_user.user_type.eql?('admin')
+                  th = 'Stock Owner Type'
+                  th = 'Stock Owner Name'
+                th.text-right = 'Amount'
+            tbody
+              - @stock_items.each do |item|
+                tr
+                  td = item.stock.name
+                  - if current_user.user_type.eql?('admin')
+                    td = item.stockable_type
+                    td = item.stockable.name
+                  td.text-right = nominal_format(item.amount)
+          = paginate @stock_items
+    - else
+      .alert.alert-info.alert-dismissible
+        h4 = "Data Not Found"
+        .btn-list
+          = link_to "Buy Stock", new_money_transaction_path(transaction_type: 'buying'), class: 'btn btn-success'
+  .col-xl-3
+    = render 'stock_items/partial/filter'

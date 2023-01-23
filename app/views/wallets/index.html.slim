@@ -1,0 +1,28 @@
+.row.m-4
+  = render 'shared/flash_messages'
+.row.m-2
+  .col-xl-9
+    - if @wallets.present?
+      .card.bg-color-info
+        .card-header.d-flex.justify-content-between
+          h3.card-title style='width:20%;'
+            = "Wallet"
+        .table-responsive
+          table.table.card-table.table-vcenter.text-nowrap.datatable.table-data
+            thead
+              tr
+                th = 'Wallet Owner Type'
+                th = 'Wallet Owner Name'
+                th.text-right = 'Balance'
+            tbody
+              - @wallets.each do |wallet|
+                tr
+                  td = wallet.walletable_type
+                  td = wallet.walletable.name
+                  td.text-right = nominal_format(wallet.total_balance.present? ? wallet.total_balance : 0)
+          = paginate @wallets
+    - else
+      .alert.alert-info.alert-dismissible
+        h4 = "Data Not Found"
+  .col-xl-3
+    = render 'wallets/partial/filter'

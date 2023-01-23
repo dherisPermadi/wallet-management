@@ -1,0 +1,12 @@
+.card.bg-color-info
+  = search_form_for @search, html: { autocomplete: "off" }  do |f|
+    .card-header.bg-color-main
+      h3.card-title = 'Search Wallet'
+    .card-body
+      .form-group
+        = f.label 'Name', class: 'form-label'
+        = f.search_field :walletable_of_Stock_type_name_or_walletable_of_Team_type_name_or_walletable_of_User_type_name_cont,
+          class: 'form-control', placeholder: "Jack Hensen / Gold / A Teaam"
+    .card-footer.text-right.ml-2
+      = f.submit 'Filter', class: 'btn btn-primary'
+      = link_to 'Clear Filter', wallets_path, class: 'btn btn-secondary'

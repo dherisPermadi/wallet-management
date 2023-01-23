@@ -4,7 +4,10 @@ Rails.application.routes.draw do
     sign_out: 'logout'
   }
 
+  resources :money_transactions, except: [:edit, :update, :destroy]
   resources :stocks
+  resources :stock_items, only: :index
+  resources :wallets, only: [:index, :show]
 
   root 'dashboard#index'
 end

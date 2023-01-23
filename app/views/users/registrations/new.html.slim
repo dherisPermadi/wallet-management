@@ -11,8 +11,8 @@
                 b.font-color-main.d-flex.justify-content-center Sign Up
               = devise_error_messages!
               .form-group
-                label.form-label Full Name
-                = f.text_field :full_name, autofocus: true, autocomplete: "full-name", class: 'form-control'
+                label.form-label Name
+                = f.text_field :name, autofocus: true, autocomplete: "full-name", class: 'form-control'
               .form-group.mt-2
                 label.form-label Email
                 = f.email_field :email, autocomplete: "email", class: 'form-control'

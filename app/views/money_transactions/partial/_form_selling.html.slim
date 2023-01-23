@@ -1,0 +1,48 @@
+= form_for @money_transaction, html: { autocomplete: 'off' } do |f|
+  = render partial: 'shared/form_error_messages', locals: { selector: @money_transaction }
+  - stock_owned = current_user.stock_items.order('stock_id')
+  .row
+    .col-md-6
+      .card.bg-color-info
+        .card-body
+          h3.card-title
+            = "Selling Stock"
+          .row
+            .col-md-4
+              .form-group
+                = f.label 'My Balance', class: 'form-label'
+                = text_field_tag 'my_balance', nominal_format(current_user.wallet.balance), class: 'form-control', disabled: true
+          .row
+            .col-md-4
+              .form-group
+                = f.hidden_field :transaction_type, value: 'selling'
+                = f.hidden_field :transactionable_type, value: 'User'
+                = f.hidden_field :transactionable_id, value: current_user.id
+                = f.label 'Stock', class: 'form-label'
+                = f.hidden_field :targetable_type, value: 'Stock'
+                = f.collection_select :targetable_id, Stock.where(id: stock_owned.pluck(:stock_id)).order(:id),
+                                      :id, :name, {}, {class: 'form-control'}
+            .col-md-4
+              .form-group
+                = f.label 'Amount', class: 'form-label'
+                = f.text_field :amount, class: 'form-control'
+        .card-footer
+          .d-flex
+            = link_to "Back", stock_items_path, class: 'btn btn-secondary'
+            = f.submit "Submit", class: 'btn btn-primary ml-auto'
+    .col-md-6
+      .card.bg-color-info
+        .card-header.d-flex.justify-content-between
+          h3.card-title style='width:20%;'
+            = "Stock Item Owned"
+        .table-responsive
+          table.table.card-table.table-vcenter.text-nowrap.datatable.table-data
+            thead
+              tr
+                th = 'Stock Name'
+                th.text-right = 'Amount'
+            tbody
+              - stock_owned.each do |item|
+                tr
+                  td = item.stock.name
+                  td.text-right = nominal_format(item.amount)

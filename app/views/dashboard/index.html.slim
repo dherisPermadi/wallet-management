@@ -1,3 +1,7 @@
 .container
+  .row.m-4
+    = render 'shared/flash_messages'
   - if current_user.user_type.eql?('admin')
     = render 'dashboard/admin_index'
+  - else
+    = render 'dashboard/user_index'
